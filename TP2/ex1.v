@@ -1,6 +1,13 @@
-(*Lemma ex1 : forall a b:Prop, a \/ (a -> b).
+Require Import Classical.
+
+
+Lemma ex1 : forall a b:Prop, a \/ (a -> b).
 Proof.
-intros a b.*)
+intros a b.
+classical_right.
+intro H0.
+contradiction.
+Qed.
 
 
 Lemma ex2 : forall a b:Prop, ((a -> b) /\ ~b) -> ~a.
