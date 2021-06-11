@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="6">
+<prover id="0" name="Z3" version="4.8.6" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="1" name="CVC4" version="1.7" timelimit="1" steplimit="0" memlimit="1000"/>
+<file format="whyml" proved="true">
+<path name=".."/><path name="ex1.mlw"/>
+<theory name="Top" proved="true">
+ <goal name="primo&#39;vc" expl="VC for primo" proved="true">
+ <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="27026972"/></proof>
+ <proof prover="1" obsolete="true"><result status="unknown" time="0.03" steps="10180"/></proof>
+ <transf name="split_vc" proved="true" >
+  <goal name="primo&#39;vc.0" expl="loop invariant init" proved="true">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="88434761"/></proof>
+  <proof prover="1" obsolete="true"><result status="unknown" time="0.03" steps="7334"/></proof>
+  <transf name="split_vc" proved="true" >
+   <goal name="primo&#39;vc.0.0" expl="loop invariant init" proved="true">
+   <proof prover="1"><result status="valid" time="0.01" steps="2399"/></proof>
+   </goal>
+   <goal name="primo&#39;vc.0.1" expl="loop invariant init" proved="true">
+   <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="134170091"/></proof>
+   <proof prover="1"><result status="valid" time="0.01" steps="2399"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="primo&#39;vc.1" expl="loop invariant init" proved="true">
+  <proof prover="1"><result status="valid" time="0.01" steps="2503"/></proof>
+  </goal>
+  <goal name="primo&#39;vc.2" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.00" steps="2866"/></proof>
+  </goal>
+  <goal name="primo&#39;vc.3" expl="loop invariant preservation" proved="true">
+  <proof prover="1"><result status="valid" time="0.02" steps="3083"/></proof>
+  </goal>
+  <goal name="primo&#39;vc.4" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.01" steps="11434"/></proof>
+  <proof prover="1"><result status="unknown" time="0.04" steps="18958"/></proof>
+  </goal>
+  <goal name="primo&#39;vc.5" expl="loop invariant preservation" proved="true">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="60600384"/></proof>
+  <proof prover="1" obsolete="true"><result status="unknown" time="0.02" steps="8838"/></proof>
+  <transf name="split_vc" proved="true" >
+   <goal name="primo&#39;vc.5.0" expl="loop invariant preservation" proved="true">
+   <proof prover="1"><result status="valid" time="0.01" steps="3050"/></proof>
+   </goal>
+   <goal name="primo&#39;vc.5.1" expl="loop invariant preservation" proved="true">
+   <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="24829574"/></proof>
+   <proof prover="1"><result status="valid" time="0.01" steps="2617"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="primo&#39;vc.6" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.01" steps="18417"/></proof>
+  <proof prover="1"><result status="unknown" time="0.04" steps="12335"/></proof>
+  </goal>
+  <goal name="primo&#39;vc.7" expl="postcondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.02" steps="2911"/></proof>
+  </goal>
+  <goal name="primo&#39;vc.8" expl="postcondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.01" steps="2969"/></proof>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+</file>
+</why3session>
