@@ -4,69 +4,182 @@
 <why3session shape_version="6">
 <prover id="0" name="Z3" version="4.8.6" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="1" name="CVC4" version="1.7" timelimit="1" steplimit="0" memlimit="1000"/>
-<prover id="2" name="Z3" version="4.8.6" alternative="counterexamples" timelimit="1" steplimit="0" memlimit="1000"/>
 <file format="whyml" proved="true">
 <path name=".."/><path name="ex1.mlw"/>
-<theory name="Top" proved="true">
+<theory name="Primo" proved="true">
  <goal name="primo&#39;vc" expl="VC for primo" proved="true">
- <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="27026972"/></proof>
- <proof prover="1" obsolete="true"><result status="unknown" time="0.03" steps="10180"/></proof>
+ <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="16161780"/></proof>
+ <proof prover="1" obsolete="true"><result status="unknown" time="0.04" steps="11002"/></proof>
  <transf name="split_vc" proved="true" >
-  <goal name="primo&#39;vc.0" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.01" steps="2374"/></proof>
+  <goal name="primo&#39;vc.0" expl="loop invariant init" proved="true">
+  <proof prover="1"><result status="valid" time="0.02" steps="2413"/></proof>
   </goal>
   <goal name="primo&#39;vc.1" expl="loop invariant init" proved="true">
-  <proof prover="1" obsolete="true"><result status="unknown" time="0.03" steps="7334"/></proof>
-  <proof prover="2" obsolete="true"><result status="timeout" time="1.00" steps="6752216"/></proof>
-  <transf name="split_vc" proved="true" >
-   <goal name="primo&#39;vc.1.0" expl="loop invariant init" proved="true">
-   <proof prover="1"><result status="valid" time="0.01" steps="2399"/></proof>
-   </goal>
-   <goal name="primo&#39;vc.1.1" expl="loop invariant init" proved="true">
-   <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="23968450"/></proof>
-   <proof prover="1"><result status="valid" time="0.01" steps="2392"/></proof>
-   </goal>
-  </transf>
+  <proof prover="1"><result status="valid" time="0.01" steps="2513"/></proof>
   </goal>
-  <goal name="primo&#39;vc.2" expl="loop invariant init" proved="true">
-  <proof prover="1"><result status="valid" time="0.01" steps="2496"/></proof>
+  <goal name="primo&#39;vc.2" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.02" steps="2891"/></proof>
   </goal>
-  <goal name="primo&#39;vc.3" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.00" steps="2963"/></proof>
+  <goal name="primo&#39;vc.3" expl="loop invariant preservation" proved="true">
+  <proof prover="1"><result status="valid" time="0.02" steps="3098"/></proof>
   </goal>
   <goal name="primo&#39;vc.4" expl="loop invariant preservation" proved="true">
-  <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="25975045"/></proof>
-  <proof prover="1"><result status="valid" time="0.02" steps="3153"/></proof>
+  <proof prover="0"><result status="valid" time="0.01" steps="12017"/></proof>
+  <proof prover="1"><result status="unknown" time="0.03" steps="9950"/></proof>
   </goal>
   <goal name="primo&#39;vc.5" expl="loop invariant preservation" proved="true">
-  <proof prover="0"><result status="valid" time="0.01" steps="11755"/></proof>
-  <proof prover="1"><result status="unknown" time="0.04" steps="18304"/></proof>
-  </goal>
-  <goal name="primo&#39;vc.6" expl="loop invariant preservation" proved="true">
-  <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="60600384"/></proof>
-  <proof prover="1" obsolete="true"><result status="unknown" time="0.02" steps="8838"/></proof>
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="26125347"/></proof>
+  <proof prover="1" obsolete="true"><result status="unknown" time="0.03" steps="8255"/></proof>
   <transf name="split_vc" proved="true" >
-   <goal name="primo&#39;vc.6.0" expl="loop invariant preservation" proved="true">
-   <proof prover="1"><result status="valid" time="0.01" steps="3119"/></proof>
+   <goal name="primo&#39;vc.5.0" expl="loop invariant preservation" proved="true">
+   <proof prover="1"><result status="valid" time="0.01" steps="3058"/></proof>
    </goal>
-   <goal name="primo&#39;vc.6.1" expl="loop invariant preservation" proved="true">
-   <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="56907341"/></proof>
-   <proof prover="1"><result status="valid" time="0.01" steps="2639"/></proof>
+   <goal name="primo&#39;vc.5.1" expl="loop invariant preservation" proved="true">
+   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00" steps="123364260"/></proof>
+   <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="unknown" time="0.03" steps="8234"/></proof>
+   <transf name="inline_goal" proved="true" >
+    <goal name="primo&#39;vc.5.1.0" expl="loop invariant preservation" proved="true">
+    <transf name="split_all_full" proved="true" >
+     <goal name="primo&#39;vc.5.1.0.0" expl="loop invariant preservation" proved="true">
+     <proof prover="0" timelimit="30" memlimit="4000" obsolete="true"><undone/></proof>
+     <proof prover="1"><result status="valid" time="0.01" steps="3837"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
    </goal>
   </transf>
   </goal>
-  <goal name="primo&#39;vc.7" expl="loop invariant preservation" proved="true">
-  <proof prover="0"><result status="valid" time="0.01" steps="20232"/></proof>
-  <proof prover="1"><result status="unknown" time="0.03" steps="15466"/></proof>
+  <goal name="primo&#39;vc.6" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.01" steps="16136"/></proof>
+  <proof prover="1"><result status="unknown" time="0.03" steps="14399"/></proof>
+  </goal>
+  <goal name="primo&#39;vc.7" expl="postcondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.01" steps="2939"/></proof>
   </goal>
   <goal name="primo&#39;vc.8" expl="postcondition" proved="true">
-  <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="176676374"/></proof>
-  <proof prover="1"><result status="valid" time="0.01" steps="3153"/></proof>
-  </goal>
-  <goal name="primo&#39;vc.9" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.01" steps="3150"/></proof>
+  <proof prover="1"><result status="valid" time="0.01" steps="2533"/></proof>
   </goal>
  </transf>
+ </goal>
+</theory>
+<theory name="Primo_Halved" proved="true">
+ <goal name="primo_halved&#39;vc" expl="VC for primo_halved" proved="true">
+ <proof prover="0"><result status="valid" time="0.01" steps="32729"/></proof>
+ <proof prover="1"><result status="unknown" time="0.06" steps="17540"/></proof>
+ </goal>
+</theory>
+<theory name="Primo_Sqrt" proved="true">
+ <goal name="sqr_non_neg" proved="true">
+ <proof prover="1"><result status="valid" time="0.01" steps="754"/></proof>
+ </goal>
+ <goal name="srq_sumcomm" proved="true">
+ <proof prover="1"><result status="valid" time="0.01" steps="251"/></proof>
+ </goal>
+ <goal name="sqr_succ" proved="true">
+ <proof prover="1"><result status="valid" time="0.01" steps="317"/></proof>
+ </goal>
+ <goal name="sqr_sum" proved="true">
+ <proof prover="1"><result status="valid" time="0.01" steps="399"/></proof>
+ </goal>
+ <goal name="sqr_incr0" proved="true">
+ <proof prover="1"><result status="valid" time="0.01" steps="444"/></proof>
+ </goal>
+ <goal name="sqr_incr1" proved="true">
+ <proof prover="1"><result status="valid" time="0.01" steps="517"/></proof>
+ </goal>
+ <goal name="sqr_incr2" proved="true">
+ <proof prover="1"><result status="valid" time="0.01" steps="1849"/></proof>
+ </goal>
+ <goal name="sqr_increasing" proved="true">
+ <proof prover="1"><result status="valid" time="0.03" steps="7230"/></proof>
+ </goal>
+ <goal name="isqrt&#39;vc" expl="VC for isqrt" proved="true">
+ <proof prover="1"><result status="valid" time="0.02" steps="5758"/></proof>
+ </goal>
+ <goal name="primo_sqrt&#39;vc" expl="VC for primo_sqrt" proved="true">
+ <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="3474297"/></proof>
+ <proof prover="1" obsolete="true"><result status="timeout" time="1.00" steps="232901"/></proof>
+ <transf name="split_vc" proved="true" >
+  <goal name="primo_sqrt&#39;vc.0" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.01" steps="3445"/></proof>
+  </goal>
+  <goal name="primo_sqrt&#39;vc.1" expl="loop invariant init" proved="true">
+  <proof prover="1"><result status="valid" time="0.01" steps="3152"/></proof>
+  </goal>
+  <goal name="primo_sqrt&#39;vc.2" expl="loop invariant init" proved="true">
+  <proof prover="1"><result status="valid" time="0.01" steps="3252"/></proof>
+  </goal>
+  <goal name="primo_sqrt&#39;vc.3" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.01" steps="3800"/></proof>
+  </goal>
+  <goal name="primo_sqrt&#39;vc.4" expl="loop invariant preservation" proved="true">
+  <proof prover="1"><result status="valid" time="0.01" steps="3977"/></proof>
+  </goal>
+  <goal name="primo_sqrt&#39;vc.5" expl="loop invariant preservation" proved="true">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="3375555"/></proof>
+  <proof prover="1" obsolete="true"><result status="timeout" time="1.00" steps="308015"/></proof>
+  <transf name="split_vc" proved="true" >
+   <goal name="primo_sqrt&#39;vc.5.0" expl="loop invariant preservation" proved="true">
+   <proof prover="0"><result status="valid" time="0.00" steps="16571"/></proof>
+   <proof prover="1"><result status="timeout" time="1.00" steps="307574"/></proof>
+   </goal>
+   <goal name="primo_sqrt&#39;vc.5.1" expl="loop invariant preservation" proved="true">
+   <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="18318"/></proof>
+   <proof prover="1"><result status="valid" time="0.00" steps="3502"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="primo_sqrt&#39;vc.6" expl="loop invariant preservation" proved="true">
+  <proof prover="1"><result status="valid" time="0.01" steps="3961"/></proof>
+  </goal>
+  <goal name="primo_sqrt&#39;vc.7" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="timeout" time="1.00" steps="3610689"/></proof>
+  <proof prover="1"><result status="timeout" time="1.00" steps="308015"/></proof>
+  <transf name="split_vc" proved="true" >
+   <goal name="primo_sqrt&#39;vc.7.0" expl="loop invariant preservation" proved="true">
+   <proof prover="0"><result status="valid" time="0.01" steps="16931"/></proof>
+   <proof prover="1"><result status="timeout" time="1.00" steps="308602"/></proof>
+   </goal>
+   <goal name="primo_sqrt&#39;vc.7.1" expl="loop invariant preservation" proved="true">
+   <proof prover="0"><result status="valid" time="0.01" steps="18318"/></proof>
+   <proof prover="1"><result status="timeout" time="1.00" steps="307863"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="primo_sqrt&#39;vc.8" expl="postcondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.01" steps="3815"/></proof>
+  </goal>
+  <goal name="primo_sqrt&#39;vc.9" expl="postcondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.01" steps="3835"/></proof>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+<theory name="Square">
+ <goal name="sqr_non_neg">
+ <proof prover="1"><undone/></proof>
+ </goal>
+ <goal name="srq_sumcomm">
+ <proof prover="1"><undone/></proof>
+ </goal>
+ <goal name="sqr_succ">
+ <proof prover="1"><undone/></proof>
+ </goal>
+ <goal name="sqr_sum">
+ <proof prover="1"><undone/></proof>
+ </goal>
+ <goal name="sqr_incr0">
+ <proof prover="1"><undone/></proof>
+ </goal>
+ <goal name="sqr_incr1">
+ <proof prover="1"><undone/></proof>
+ </goal>
+ <goal name="sqr_incr2">
+ <proof prover="1"><undone/></proof>
+ </goal>
+ <goal name="sqr_increasing">
+ <proof prover="1"><undone/></proof>
  </goal>
 </theory>
 </file>

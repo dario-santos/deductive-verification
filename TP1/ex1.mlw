@@ -6,37 +6,157 @@ primo(n) :
   devolver verdade
 *)
 
-(* 
+(*
+  Referencias:
+   - http://why3.lri.fr/stdlib-0.81/int.why.html;
+   - http://why3.lri.fr/stdlib-0.81/real.why.html;
+   - http://toccata.lri.fr/gallery/isqrt.en.html.
+
+
   Este exercício apresentou-nos diversas dificuldades devido à pouca experiência que possuimos em Why3.
   Na definição das pós condições inicialmente possuiamos demasiadas redundâncias, uma pós condição para cada caso (quando o número é primo, e quando não o é)
-   por exemplo possuiamos o exist para quando não fosse primo (existe um número que divide) e o forall para quando era primo (para cada número nenhum divide).
+  por exemplo possuiamos o exist para quando não fosse primo (existe um número que divide) e o forall para quando era primo (para cada número nenhum divide).
    
   Numa tentativa de simplificar esta complexidade, foi utilizado o módulo Prime do Why3 (prime n). Por não conseguirmos chegar a um invariante para esta 
   póscondição retornamos um paço a trás e recolocamos o (forall i. 2 <= i < n -> (mod n i) = 0)
   
+  Aquando a implementação da otimização da raiz quadrada, surgiu-nos a ideia de substituir o forall pelo exist, visto que este faz mais sentido com o problema em questão.
+  O de "existir" um divisor de n. 
   
+  Na pré-condição é necessário garantir que este é maior do que 1, pois não faria sentido matemáticamente verificar a sua primalidade.
+  
+  Otimização: verificar os números até a divisão até n/2 em vez de até n.
 *)
 
 
-(* 
-  Otimização: verificar os números até a raíz quadrada de n em vez de até n.
+
+
+
+(*
+  Module: Primo
+  Date: 11/06/2021
+  Description: Verificação da primalidade, utilizando um algoritmo ingénuo
 *)
+module Primo
+  use int.Int
+  use int.EuclideanDivision
+  use ref.Ref
+  
+  let primo (n:int) : bool
+    requires{n > 1}
+    ensures {(not result) <-> (exists j. 2 <= j < n /\ (mod n j) = 0)}
+  =
+    let resultado = ref true in
 
-use ref.Ref
-use int.Int
-use int.EuclideanDivision
+    for i=2 to n-1 do
+      invariant{2 <= i /\ i <= n }
+      
+      invariant{(not !resultado) <-> (exists j. 2 <= j < i /\ (mod n j) = 0)}
 
-let primo (n:int) : bool
-  requires{n > 0}
-  ensures {result = (forall i. 2 <= i <= (div n 2) -> (mod n i) = 0)}
-=
-  let resultado = ref true in
+      if (mod n i) = 0 then resultado := false
 
-  for i=2 to (div n 2) do
-    invariant{2 <= i /\ i <= (div n 2)+1 }
-    invariant{!resultado = (forall j. 2 <= j < i -> (mod n j) = 0)}
+    done;
+    !resultado
+end
 
-    if (mod n i) <> 0 then resultado := false
 
-  done;
-  !resultado
+
+
+(*
+  Module: Primo_Halved
+  Date: 11/06/2021
+  Description: Verificação da primalidade dum número, com a otimização da sua divisão por 2
+*)
+module Primo_Halved
+  use int.Int
+  use int.EuclideanDivision
+  use ref.Ref
+  
+  let primo_halved (n:int) : bool
+    requires{n > 1}
+    ensures {(not result) <-> (exists j. 2 <= j <= (div n 2) /\ (mod n j) = 0)}
+  =
+    let resultado = ref true in
+    let n2 = (div n 2) in
+
+    for i=2 to n2 do
+      invariant{2 <= i /\ i <= n2+1 }
+      
+      invariant{(not !resultado) <-> (exists j. 2 <= j < i /\ (mod n j) = 0)}
+
+      if (mod n i) = 0 then resultado := false
+
+    done;
+    !resultado
+end
+
+
+
+(*
+  Module: Primo_Sqrt
+  Date: 11/06/2021
+  Description: Verificação da primalidade dum número, com a otimização da sua raiz quadrada
+  Referencias: http://toccata.lri.fr/gallery/isqrt.en.html
+*)
+module Primo_Sqrt
+
+  use int.Int
+
+  function sqr (x:int) : int = x * x
+  lemma sqr_non_neg: 
+    forall x:int. sqr x >= 0
+  lemma srq_sumcomm : 
+    forall x y:int. sqr (x+y) = sqr (y+x)
+  lemma sqr_succ : 
+    forall x : int. sqr (x+1) = sqr(x) + 2*x + 1
+  lemma sqr_sum :
+    forall x y : int. sqr(x+y) = sqr x + 2*x*y + sqr y
+  lemma sqr_incr0 : 
+    forall x:int. sqr(x) = sqr(x+0)   
+  lemma sqr_incr1 : 
+    forall x:int. x >= 0 -> sqr x < sqr (x+1)
+  lemma sqr_incr2 : 
+    forall x y:int. x >= 0 /\ y >= 0 -> sqr (x) <= sqr(x+y)
+  lemma sqr_increasing:
+    forall x y:int. 0 <= x <= y -> sqr x <= sqr y
+  
+  predicate isqrt_spec (x res:int) =
+    res >= 0 /\ sqr res <= x < sqr (res + 1)
+  
+  use int.Int
+  use int.EuclideanDivision
+  use ref.Ref
+
+  let function isqrt (x:int) : int
+      requires { x >= 0 }
+      ensures  { isqrt_spec x result }
+    = 
+      let count = ref 0 in
+      let sum = ref 1 in
+      while !sum <= x do
+        invariant { !count >= 0 }
+        invariant { x >= sqr !count }
+        invariant { !sum = sqr (!count+1) }
+        variant   { x - !count }
+        count := !count + 1;
+        sum := !sum + 2 * !count + 1
+      done;
+      !count
+
+  let primo_sqrt (n:int) : bool
+    requires{n > 1}
+    ensures {(not result) <-> (exists j. 2 <= j <= (isqrt n) /\ (mod n j) = 0)}
+  =
+    let resultado = ref true in
+    let n2 = (isqrt n) in
+
+    for i=2 to n2 do
+      invariant{2 <= i /\ i <= n2+1 }
+      
+      invariant{(not !resultado) <-> (exists j. 2 <= j < i /\ (mod n j) = 0)}
+
+      if (mod n i) = 0 then resultado := false
+
+    done;
+    !resultado
+end

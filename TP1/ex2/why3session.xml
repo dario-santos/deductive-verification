@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="6">
+<prover id="0" name="Z3" version="4.8.6" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="1" name="CVC4" version="1.7" timelimit="1" steplimit="0" memlimit="1000"/>
+<file format="whyml">
+<path name=".."/><path name="ex2.mlw"/>
+<theory name="Top">
+ <goal name="ex2&#39;vc" expl="VC for ex2">
+ <proof prover="0" obsolete="true"><result status="unknown" time="0.01" steps="999"/></proof>
+ <proof prover="1" obsolete="true"><result status="unknown" time="0.02" steps="4657"/></proof>
+ <transf name="split_vc" >
+  <goal name="ex2&#39;vc.0" expl="postcondition">
+  <proof prover="0"><result status="unknown" time="0.01" steps="878"/></proof>
+  <proof prover="1"><result status="unknown" time="0.01" steps="4650"/></proof>
+  </goal>
+  <goal name="ex2&#39;vc.1" expl="postcondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.01" steps="208"/></proof>
+  </goal>
+  <goal name="ex2&#39;vc.2" expl="postcondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.01" steps="212"/></proof>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+</file>
+</why3session>
