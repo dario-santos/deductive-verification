@@ -70,28 +70,6 @@ rewrite <- (Nat.add_comm  (n + n * n + n) n).
 reflexivity.
 Qed.
 
-
-Lemma somat_correct : ( n : nat )( somat n )= ( div2 ( mult n ( S n ))).
-Proof .
-
-(* completar *)
-induction n.
-
-(* Caso Base *)
-simpl.
-reflexivity.
-
-(* Caso Indutivo *)
-rewrite IHn.
-simpl.
-rewrite <- (Nat.add_comm (mul n (S n)) n).
-rewrite <- (Nat.mul_comm (S n) n).
-simpl.
-rewrite <- (Nat.add_comm (S (n + n * n + n)) n).
-simpl.
-
-Qed.
-
 Lemma somat_correct: forall (n:nat), (somat n) = (div2 (mult n (S n))).
 Proof.
 (* completar *)
