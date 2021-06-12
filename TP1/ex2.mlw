@@ -1,6 +1,98 @@
-use int.Int
+(* 
+  k := 1;
+  s := b[0];
+  c := b[0];
+  
+  do k <> n 
+    c:= min (c+b[k]) b[k];
+    s:= min c s;
+    
+    k:= k+l
+  od
 
-let ex2 (v : int) : int
+*)
 
 
-= 
+(* 
+  Referencias:
+   - [1] “A note on a standard strategy for developing loop invariants and 
+       loops, Sci. Comput. Programming, 2, pp. 207-214. 1982.”
+   - [2] https://www.geeksforgeeks.org/smallest-sum-contiguous-subarray/.
+   
+   
+   
+   Tivemos problemas em compreender a sintaxe utilizada no pseudo código.
+   
+*)
+
+
+(*
+  Module: PaperExample
+  Date: 12/06/2021
+  Description: Implementação do exemplo do artigo [1]
+*)
+module PaperExample
+  use int.Int
+  use ref.Ref
+  use array.Array
+  use array.ArraySum
+
+  let example (v: array int) : int
+    requires{length v >= 0}
+    ensures{let n = length v in result = (sum v 0 n) }
+    =
+    let n = length v in
+    let p = ref 0 in
+    
+    for i=0 to n-1 do
+      invariant{0 <= i <= n}
+      invariant{!p = (sum v 0 i)}
+      p := !p + v[i]
+    done;
+    !p
+end
+
+
+(*
+  Module: Exercise
+  Date: 12/06/2021
+  Description: Implementação do exemplo do artigo [1]
+*)
+module Exercise
+  use int.Int
+  use int.MinMax
+  use ref.Ref
+  use array.Array
+  use array.ArraySum
+  use array.ArrayPermut
+  
+  let ex2 (v: array int) : int
+    requires{length v > 0}
+    ensures {permut_all (old v) v}
+    
+    ensures {
+      forall i j:int. 0 <= i < j <= (length v) -> result <= (sum v i j)}
+      
+    (*ensures {
+      exists i j:int. 0 <= i < j <= (length v) /\ result = (sum v i j)}*)
+   =
+    let n = length v in
+    let s = ref (v[0]) in
+    let c = ref (v[0]) in
+    
+    for k=1 to n-1 do
+      invariant{0 <= k <= n}
+      invariant {permut_all (old v) v}
+      invariant {forall i j:int. 0 <= i < j <= k -> !s <= (sum v i j)}
+      invariant {forall i:int. 0 <= i < k -> !c <= (sum v i k)}
+      (*
+        invariant {exists i j:int. 0 <= i < j <= k /\ !s = (sum v i j)}
+        invariant {exists i:int. 0 <= i <= k /\ !c = (sum v i k)}
+      *)
+      c := min (!c + v[k]) v[k];
+      s := min !s !c
+      
+      
+    done;
+    !s
+end

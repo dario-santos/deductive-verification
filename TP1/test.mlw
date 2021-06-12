@@ -66,32 +66,16 @@ module Exercise
   use array.ArraySum
   use array.ArrayPermut
   
-  let ex2 (v: array int) : int
-    requires{length v > 0}
-    ensures {permut_all (old v) v}
+  let ex2 (a: int) : (int, array int)
+    ensures {let r, v = result in
     
-    ensures {
-      forall i j:int. 0 <= i < j <= (length v) -> result <= (sum v i j)}
-      
-    (*ensures {
-      exists i j:int. 0 <= i < j <= (length v) /\ result = (sum v i j)}*)
+    forall i j:int. 0 <= i <= j < 1 -> r <= (sum v i j)}
    =
-    let n = length v in
-    let s = ref (v[0]) in
-    let c = ref (v[0]) in
-    
-    for k=1 to n-1 do
-      invariant{0 <= k <= n}
-      invariant {permut_all (old v) v}
-      invariant {forall i j:int. 0 <= i < j <= k -> !s <= (sum v i j)}
-      invariant {forall i:int. 0 <= i < k -> !c <= (sum v i k)}
-      (*invariant {exists i j:int. 0 <= i < j <= k /\ !s = (sum v i j)}
-      invariant {exists i:int. 0 <= i <= k /\ !c = (sum v i k)}
-      *)
-      c := min (!c + v[k]) v[k];
-      s := min !s !c
-      
-      
-    done;
-    !s
+   let v = make 2 1 in
+   
+    assert{0 = (sum v 0 0)};
+    v[0], v
 end
+
+
+
