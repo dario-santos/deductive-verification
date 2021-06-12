@@ -50,3 +50,24 @@ Ind v2:
    
 
 ```
+
+
+## somat_correct
+
+```
+somat n = (n * (n + 1)) / 2
+
+
+base:
+  somat 0 = (0 * (0 + 1)) / 2
+  (reflexivity) 0 = 0
+
+indutivo:
+  Hip.:
+    somat k = (k * (k + 1)) / 2
+
+  Ind.: 
+    somat k = (k * (k + 1)) / 2
+   
+
+```

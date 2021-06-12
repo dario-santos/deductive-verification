@@ -72,18 +72,19 @@ Qed.
 
 Lemma somat_correct: forall (n:nat), (somat n) = (div2 (mult n (S n))).
 Proof.
-(* completar *)
-
-(*
+(* Caso Base *)
 intros.
 induction n.
-trivial. (* Caso do 0 *)
-*)
+simpl.
+reflexivity.
 
-intros n.
-induction n as [ | k IH].
- - trivial.
- - simpl.
-rewrite -> IH.
-
+(* Caso Indutivo *)
+simpl.
+rewrite -> (somat_aux n).
+rewrite <- (Nat.mul_comm (S (S n)) n).
+rewrite <- (Nat.add_comm (S (S n) * n) n).
+simpl.
+rewrite <- (Nat.add_comm (n + n * n) n).
+rewrite <- (Nat.add_comm (n + n * n + n) n).
+reflexivity.
 Qed.
