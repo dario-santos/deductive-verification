@@ -9,7 +9,7 @@
     
     k:= k+l
   od
-
+R
 *)
 
 
@@ -60,6 +60,7 @@ end
 *)
 module Exercise
   use int.Int
+  use int.Abs
   use int.MinMax
   use ref.Ref
   use array.Array
@@ -69,29 +70,24 @@ module Exercise
   let ex2 (v: array int) : int
     requires{length v > 0}
     ensures {permut_all (old v) v}
-    
-    ensures {
-      forall i j:int. 0 <= i < j <= (length v) -> result <= (sum v i j)}
-      
-    (*ensures {
-      exists i j:int. 0 <= i < j <= (length v) /\ result = (sum v i j)}*)
+    ensures {forall i j:int. 0 <= i < j <= (length v) -> result <= (sum v i j)}
+    ensures {exists i j:int. 0 <= i < j <= (length v) /\ result = (sum v i j)}
    =
     let n = length v in
-    let s = ref (v[0]) in
-    let c = ref (v[0]) in
+    let s = ref v[0] in
+    let c = ref v[0] in
     
     for k=1 to n-1 do
-      invariant{0 <= k <= n}
+      invariant {0 <= k <= n}
       invariant {permut_all (old v) v}
       invariant {forall i j:int. 0 <= i < j <= k -> !s <= (sum v i j)}
       invariant {forall i:int. 0 <= i < k -> !c <= (sum v i k)}
-      (*
-        invariant {exists i j:int. 0 <= i < j <= k /\ !s = (sum v i j)}
-        invariant {exists i:int. 0 <= i <= k /\ !c = (sum v i k)}
-      *)
-      c := min (!c + v[k]) v[k];
-      s := min !s !c
       
+      invariant {exists i j:int. 0 <= i < j <= k /\ !s = (sum v i j)}
+      invariant {exists i:int. 0 <= i < k /\ !c = (sum v i k)}
+
+      c := min (!c + v[k]) v[k];
+      s := min !s !c;
       
     done;
     !s
