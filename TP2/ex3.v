@@ -10,7 +10,7 @@ Require Import Extraction.
    - https://stackoverflow.com/questions/46410116/coq-how-to-prove-max-a-b-ab
 *)
 
-Search ( _ > _).
+Search ( _ = _ ).
 
 Lemma euclides :
  forall (a b: nat), (b > 0) ->
@@ -21,6 +21,7 @@ intros.
 induction a.
 
 (* Caso Base *)
+   (* q = 0 /\ r = 0*)
  - split with (0, 0).
    simpl.
    split.
@@ -29,40 +30,39 @@ induction a.
 
 
 (* Caso Indutivo *)
-(* a) pair(q+1, 0) *)
- - elim IHa.
-   intros x.
-   elim x.
-   intros q r.
-   simpl.
-   intro.
-   elim p. (* Separar condições de p *)
-   intros p1 p2.
-   case (le_lt_dec b (S r)). (* Analisar os casos de b >= r+1*)
+(* Guardar informações *)
+ - destruct IHa as [x p].
+   destruct x as [q r]. (* Separar par x *)
+   destruct p as [p1 p2]. (* Separar condições de p *)
+   case (Compare_dec.le_lt_dec b (S r)). (* Analisar os casos de b >= r+1*)
 
    (* b <= S r *)
+   (* q' = S q /\ r' = 0 *)
    * intro Hle.
+     (* Sabemos que b = r + 1 *)
+     cut (b = (S r)).
+     intro HBeq.
      split with (S q, 0).
      simpl.
      split.
      rewrite <- (Nat.add_comm 0 (b + (q * b))).
-     rewrite <- (Nat.add_comm (q * b) b).
      simpl.
-     (*Sabemos que b = r +1 *)
-     cut (b = (S r)).
-     intro HBeq.
+
      rewrite -> HBeq.
-     rewrite <- (Nat.add_comm (S r) ((q * (S r)))).
      simpl.
+     rewrite <- (Nat.add_comm (q * (S r)) r).
      rewrite <- HBeq. (*recolocar b *)
-     rewrite <- (Nat.add_comm (q * b) r).
      rewrite p1.
-     reflexivity.
-     auto with arith. (* b > r && b <= S r logo b = S r *)
+     simpl.
+     reflexivity. (* b > r && b <= S r logo b = S r *)
      exact H.
+     apply Nat.le_antisymm.
+     exact Hle.
+     trivial.
 
    (* b > S r *)
-   * intros.
+   (* q' = q /\ r' = S r *)
+   * intro Hgt.
      split with (q, S r).
      simpl.
      split.
@@ -70,8 +70,10 @@ induction a.
      simpl.
      rewrite <- (Nat.add_comm (q * b) r).
      rewrite p1.
+     simpl.
      reflexivity.
-     exact l.
+     exact Hgt.
 Qed.
 
+(* Extrair código para "euclides.ml" *)
 Extraction "euclides.ml" euclides.

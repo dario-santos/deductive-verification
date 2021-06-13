@@ -52,8 +52,8 @@ induction n.
     + rewrite <- (Nat.add_comm (S (n + S (n + S (n + n * S n)))) n). (* Remover os sucessores de dentro da divisão *)
       rewrite <- (Nat.add_comm (S (n + S (n + n * S n))) n).
       rewrite <- (Nat.add_comm (S (n + n * S n)) n).
+      rewrite <- (Nat.add_comm (n * S n) n).
       rewrite <- (Nat.mul_comm (S n) n).
-      rewrite <- (Nat.add_comm (S n * n) n).
       simpl. (* Volta a por a divisão e retira os S *)
 
     * rewrite -> IHn. (* O que queremos igualar *)
@@ -63,7 +63,7 @@ induction n.
       rewrite -> (dois_div n (n + (n + (n + n * n)))).
       rewrite <- (Nat.add_comm  (n + (n + (n + (n + n * n)))) n). (* Trocas para deixar ambos os termos iguais *)
       rewrite <- (Nat.add_comm  (n + (n + (n + n * n))) n).
-      rewrite <- (Nat.add_comm  (n + n * n) n). 
+      rewrite <- (Nat.add_comm  (n + n * n) n).
       rewrite <- (Nat.add_comm  (n + n * n + n) n).
       reflexivity.
 Qed.
@@ -71,7 +71,7 @@ Qed.
 Lemma somat_correct: forall (n:nat), (somat n) = (div2 (mult n (S n))).
 Proof.
 (* Caso Base *)
-intros.
+intro.
 induction n.
  - simpl.
    reflexivity.

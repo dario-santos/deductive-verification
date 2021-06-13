@@ -1,4 +1,19 @@
 (* 
+  Referencias:
+   - [1] “A note on a standard strategy for developing loop invariants and 
+      loops, Sci. Comput. Programming, 2, pp. 207-214. 1982.”;
+   - [2] https://www.geeksforgeeks.org/smallest-sum-contiguous-subarray/.
+   
+  Autores:
+   - Dário Santos 10929;
+   - David Bugalho 11031.
+
+  Dificuldades: Tivemos problemas em compreender a sintaxe utilizada no pseudo código.
+*)
+
+(*
+  Pseudo Código:
+
   k := 1;
   s := b[0];
   c := b[0];
@@ -9,22 +24,7 @@
     
     k:= k+l
   od
-R
 *)
-
-
-(* 
-  Referencias:
-   - [1] “A note on a standard strategy for developing loop invariants and 
-       loops, Sci. Comput. Programming, 2, pp. 207-214. 1982.”
-   - [2] https://www.geeksforgeeks.org/smallest-sum-contiguous-subarray/.
-   
-   
-   
-   Tivemos problemas em compreender a sintaxe utilizada no pseudo código.
-   
-*)
-
 
 (*
   Module: PaperExample
@@ -56,9 +56,8 @@ end
 (*
   Module: Exercise
   Date: 12/06/2021
-  Description: Implementação do exemplo do artigo [1]
+  Description: Implementação do algoritmo soma da secção minima de um vetor do artigo [1]
 *)
-
 module Exercise
   use int.Int
   use int.Abs
@@ -79,17 +78,14 @@ module Exercise
     let n = length v in
     let s = ref v[0] in
     let c = ref v[0] in
-   
-    
+       
     for k=1 to n-1 do
       invariant {0 <= k <= n}
       invariant {permut_all (old v) v}
       invariant {forall i j:int. 0 <= i < j <= k -> !s <= (sum v i j)}
       invariant {forall i:int. 0 <= i < k -> !c <= (sum v i k)}
-      
-      invariant {exists i j:int. 0 <= i < j <= k /\ !s = (sum v i j)}
-      invariant {exists i j:int. 0 <= i < j <= k /\ !c = (sum v i j)}
-      
+      invariant {exists i j:int. 0 <= i < j <= k /\ (!c + v[k]) = (sum v i j) -> !s = (sum v i j)}
+
       c := min (!c + v[k]) v[k];
       s := min !s !c;
       

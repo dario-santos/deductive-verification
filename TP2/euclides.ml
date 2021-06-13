@@ -28,7 +28,7 @@ let rec euclides a b =
   match a with
   | O -> Pair (O, O)
   | S n ->
-    let Pair (x, x0) = euclides n b in
-    (match le_lt_dec b (S x0) with
-     | Left -> Pair ((S x), O)
-     | Right -> Pair (x, (S x0)))
+    let Pair (q, r) = euclides n b in
+    (match le_lt_dec b (S r) with
+     | Left -> Pair ((S q), O)
+     | Right -> Pair (q, (S r)))

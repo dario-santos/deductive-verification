@@ -1,17 +1,12 @@
-(* 
-primo(n) :
-  para i=2 até n-1 fazer
-    se i divide n então devolver falso 
-  
-  devolver verdade
-*)
-
 (*
   Referencias:
    - http://why3.lri.fr/stdlib-0.81/int.why.html;
    - http://why3.lri.fr/stdlib-0.81/real.why.html;
    - http://toccata.lri.fr/gallery/isqrt.en.html.
-
+  
+  Autores:
+   - Dário Santos 10929;
+   - David Bugalho 11031.
 
   Este exercício apresentou-nos diversas dificuldades devido à pouca experiência que possuimos em Why3.
   Na definição das pós condições inicialmente possuiamos demasiadas redundâncias, uma pós condição para cada caso (quando o número é primo, e quando não o é)
@@ -28,8 +23,15 @@ primo(n) :
   Otimização: verificar os números até a divisão até n/2 em vez de até n.
 *)
 
+(*
+  Pseudo Código:
 
-
+  primo(n) :
+    para i=2 até n-1 fazer
+      se i divide n então devolver falso 
+    
+    devolver verdade
+*)
 
 
 (*
