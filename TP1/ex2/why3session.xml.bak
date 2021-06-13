@@ -4,21 +4,22 @@
 <why3session shape_version="6">
 <prover id="0" name="Z3" version="4.8.6" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="1" name="CVC4" version="1.7" timelimit="1" steplimit="0" memlimit="1000"/>
-<prover id="2" name="Z3" version="4.8.6" alternative="counterexamples" timelimit="10" steplimit="0" memlimit="4000"/>
+<prover id="2" name="Alt-Ergo" version="2.3.3" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="3" name="Z3" version="4.8.6" alternative="counterexamples" timelimit="10" steplimit="0" memlimit="4000"/>
 <file format="whyml">
 <path name=".."/><path name="ex2.mlw"/>
 <theory name="PaperExample" proved="true">
  <goal name="example&#39;vc" expl="VC for example" proved="true">
- <proof prover="1"><result status="valid" time="0.03" steps="9955"/></proof>
+ <proof prover="1"><result status="valid" time="0.02" steps="9955"/></proof>
  </goal>
 </theory>
 <theory name="Exercise">
  <goal name="ex2&#39;vc" expl="VC for ex2">
- <proof prover="0" obsolete="true"><result status="unknown" time="0.24" steps="1566846"/></proof>
- <proof prover="1" obsolete="true"><result status="timeout" time="0.78" steps="333245"/></proof>
+ <proof prover="0"><result status="timeout" time="1.00" steps="4032767"/></proof>
+ <proof prover="1"><result status="timeout" time="0.78" steps="218847"/></proof>
  <transf name="split_vc" >
   <goal name="ex2&#39;vc.0" expl="index in array bounds" proved="true">
-  <proof prover="1"><result status="valid" time="0.02" steps="11587"/></proof>
+  <proof prover="1"><result status="valid" time="0.03" steps="11587"/></proof>
   </goal>
   <goal name="ex2&#39;vc.1" expl="index in array bounds" proved="true">
   <proof prover="1"><result status="valid" time="0.02" steps="11587"/></proof>
@@ -30,118 +31,65 @@
   <proof prover="1"><result status="valid" time="0.03" steps="11813"/></proof>
   </goal>
   <goal name="ex2&#39;vc.4" expl="loop invariant init" proved="true">
-  <proof prover="1"><result status="valid" time="0.05" steps="15489"/></proof>
+  <proof prover="1"><result status="valid" time="0.04" steps="15489"/></proof>
   </goal>
   <goal name="ex2&#39;vc.5" expl="loop invariant init" proved="true">
   <proof prover="1"><result status="valid" time="0.03" steps="12131"/></proof>
   </goal>
-  <goal name="ex2&#39;vc.6" expl="loop invariant init">
-  <proof prover="0" obsolete="true"><result status="valid" time="0.07" steps="643590"/></proof>
-  <proof prover="1" obsolete="true"><result status="timeout" time="1.00" steps="489304"/></proof>
+  <goal name="ex2&#39;vc.6" expl="loop invariant init" proved="true">
+  <proof prover="1"><result status="valid" time="0.02" steps="10693"/></proof>
   </goal>
-  <goal name="ex2&#39;vc.7" expl="loop invariant init">
-  <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="7109779"/></proof>
-  <proof prover="1" obsolete="true"><result status="timeout" time="0.72" steps="260771"/></proof>
-  <transf name="split_vc" >
-   <goal name="ex2&#39;vc.7.0" expl="loop invariant init">
-   <proof prover="0" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00" steps="92432143"/></proof>
-   <proof prover="1" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="8.54" steps="1532054"/></proof>
-   <proof prover="2" obsolete="true"><result status="timeout" time="10.00" steps="85755697"/></proof>
-   </goal>
-  </transf>
+  <goal name="ex2&#39;vc.7" expl="index in array bounds" proved="true">
+  <proof prover="1"><result status="valid" time="0.02" steps="12191"/></proof>
   </goal>
-  <goal name="ex2&#39;vc.8" expl="index in array bounds">
-  <proof prover="1" obsolete="true"><result status="valid" time="0.03" steps="12220"/></proof>
+  <goal name="ex2&#39;vc.8" expl="index in array bounds" proved="true">
+  <proof prover="1"><result status="valid" time="0.02" steps="12191"/></proof>
   </goal>
-  <goal name="ex2&#39;vc.9" expl="index in array bounds">
-  <proof prover="1" obsolete="true"><result status="valid" time="0.02" steps="12220"/></proof>
+  <goal name="ex2&#39;vc.9" expl="loop invariant preservation" proved="true">
+  <proof prover="1"><result status="valid" time="0.03" steps="12935"/></proof>
   </goal>
-  <goal name="ex2&#39;vc.10" expl="loop invariant preservation">
-  <proof prover="1" obsolete="true"><result status="valid" time="0.03" steps="13069"/></proof>
+  <goal name="ex2&#39;vc.10" expl="loop invariant preservation" proved="true">
+  <proof prover="1"><result status="valid" time="0.02" steps="10689"/></proof>
   </goal>
-  <goal name="ex2&#39;vc.11" expl="loop invariant preservation">
-  <proof prover="1" obsolete="true"><result status="valid" time="0.03" steps="10788"/></proof>
+  <goal name="ex2&#39;vc.11" expl="loop invariant preservation" proved="true">
+  <proof prover="1"><result status="valid" time="0.05" steps="21369"/></proof>
   </goal>
-  <goal name="ex2&#39;vc.12" expl="loop invariant preservation">
-  <proof prover="1" obsolete="true"><result status="valid" time="0.07" steps="24058"/></proof>
+  <goal name="ex2&#39;vc.12" expl="loop invariant preservation" proved="true">
+  <proof prover="1"><result status="valid" time="0.06" steps="19427"/></proof>
   </goal>
-  <goal name="ex2&#39;vc.13" expl="loop invariant preservation">
-  <proof prover="1" obsolete="true"><result status="valid" time="0.06" steps="25240"/></proof>
+  <goal name="ex2&#39;vc.13" expl="loop invariant preservation" proved="true">
+  <proof prover="1"><result status="valid" time="0.01" steps="11312"/></proof>
   </goal>
-  <goal name="ex2&#39;vc.14" expl="loop invariant preservation">
-  <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="3346533"/></proof>
-  <proof prover="1" obsolete="true"><result status="timeout" time="1.00" steps="262529"/></proof>
-  <transf name="split_vc" >
-   <goal name="ex2&#39;vc.14.0" expl="loop invariant preservation">
-   <proof prover="1" obsolete="true"><result status="valid" time="0.03" steps="15112"/></proof>
-   </goal>
-   <goal name="ex2&#39;vc.16.0" expl="loop invariant preservation">
-   <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="2479290"/></proof>
-   <proof prover="1" obsolete="true"><result status="timeout" time="1.00" steps="256356"/></proof>
-   <transf name="split_vc" >
-    <goal name="ex2&#39;vc.16.0.0" expl="loop invariant preservation">
-    <proof prover="0" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00" steps="131012754"/></proof>
-    <proof prover="1" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="8.52" steps="1167847"/></proof>
-    </goal>
-    <goal name="ex2&#39;vc.16.0.1" expl="loop invariant preservation">
-    <proof prover="0" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00" steps="55269652"/></proof>
-    <proof prover="1" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="8.81" steps="1675325"/></proof>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
+  <goal name="ex2&#39;vc.14" expl="postcondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.02" steps="10593"/></proof>
   </goal>
-  <goal name="ex2&#39;vc.15" expl="loop invariant preservation">
-  <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="2876731"/></proof>
-  <proof prover="1" obsolete="true"><result status="timeout" time="0.78" steps="265029"/></proof>
-  <transf name="split_vc" >
-   <goal name="ex2&#39;vc.15.0" expl="loop invariant preservation">
-   <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="3249692"/></proof>
-   <proof prover="1" obsolete="true"><result status="timeout" time="1.00" steps="322449"/></proof>
-   <transf name="split_vc" >
-    <goal name="ex2&#39;vc.15.0.0" expl="loop invariant preservation">
-    <proof prover="0" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00" steps="53944895"/></proof>
-    <proof prover="1" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="8.30" steps="1098217"/></proof>
-    </goal>
-    <goal name="ex2&#39;vc.17.1.0" expl="loop invariant preservation">
-    <proof prover="0" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00" steps="83637185"/></proof>
-    <proof prover="1" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="8.23" steps="1170970"/></proof>
-    </goal>
-   </transf>
-   </goal>
-   <goal name="ex2&#39;vc.17.0" expl="loop invariant preservation">
-   <proof prover="0" obsolete="true"><result status="timeout" time="1.00" steps="2438010"/></proof>
-   <proof prover="1" obsolete="true"><result status="timeout" time="0.70" steps="262371"/></proof>
-   <transf name="split_vc" >
-    <goal name="ex2&#39;vc.17.0.0" expl="loop invariant preservation">
-    <proof prover="0" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00" steps="49818609"/></proof>
-    <proof prover="1" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="8.56" steps="1225252"/></proof>
-    </goal>
-    <goal name="ex2&#39;vc.17.0.1" expl="loop invariant preservation">
-    <proof prover="0" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00" steps="32603714"/></proof>
-    <proof prover="1" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="8.66" steps="1196299"/></proof>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
+  <goal name="ex2&#39;vc.15" expl="postcondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.03" steps="12148"/></proof>
   </goal>
   <goal name="ex2&#39;vc.16" expl="postcondition">
-  <proof prover="1" obsolete="true"><result status="valid" time="0.02" steps="10595"/></proof>
+  <proof prover="0"><result status="unknown" time="0.67" steps="7245300"/></proof>
+  <proof prover="1"><result status="timeout" time="1.00" steps="460558"/></proof>
+  <proof prover="2"><result status="timeout" time="5.00"/></proof>
+  <transf name="split_vc" >
+   <goal name="ex2&#39;vc.16.0" expl="postcondition">
+   <proof prover="0" timelimit="5" memlimit="2000"><result status="unknown" time="1.00" steps="7319797"/></proof>
+   <proof prover="1" timelimit="5" memlimit="2000"><result status="timeout" time="4.15" steps="865209"/></proof>
+   <proof prover="3"><result status="timeout" time="10.00" steps="29427579"/></proof>
+   <transf name="inline_goal" >
+    <goal name="ex2&#39;vc.16.0.0" expl="postcondition">
+    <transf name="split_all_full" >
+     <goal name="ex2&#39;vc.16.0.0.0" expl="postcondition">
+     <proof prover="0" timelimit="30" memlimit="4000"><result status="timeout" time="30.00" steps="131938099"/></proof>
+     <proof prover="1" timelimit="30" memlimit="4000"><result status="timeout" time="25.95" steps="4803176"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
   </goal>
-  <goal name="ex2&#39;vc.17" expl="postcondition">
-  <proof prover="1" obsolete="true"><result status="valid" time="0.03" steps="12396"/></proof>
-  </goal>
-  <goal name="ex2&#39;vc.18" expl="postcondition">
-  <proof prover="1" obsolete="true"><result status="valid" time="0.03" steps="13099"/></proof>
-  </goal>
-  <goal name="ex2&#39;vc.19" expl="out of loop bounds" proved="true">
+  <goal name="ex2&#39;vc.17" expl="out of loop bounds" proved="true">
   <proof prover="1"><result status="valid" time="0.02" steps="12041"/></proof>
-  </goal>
-  <goal name="ex2&#39;vc.11" expl="index in array bounds">
-  <proof prover="1" obsolete="true"><result status="valid" time="0.02" steps="12259"/></proof>
-  </goal>
-  <goal name="ex2&#39;vc.10" expl="index in array bounds">
-  <proof prover="1" obsolete="true"><result status="valid" time="0.02" steps="12263"/></proof>
   </goal>
  </transf>
  </goal>
