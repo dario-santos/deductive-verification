@@ -88,7 +88,7 @@ module Exercise
       invariant {forall i:int. 0 <= i < k -> !c <= (sum v i k)}
       
       invariant {exists i j:int. 0 <= i < j <= k /\ !s = (sum v i j)}
-      invariant {exists i j:int. 0 <= i < j <= k /\ ((!c + v[k]) = (sum v i j) \/ v[k] = (sum v i j) \/ !c = (sum v i j))}
+      invariant {exists i j:int. 0 <= i < j <= k /\ !c = (sum v i j)}
       
       c := min (!c + v[k]) v[k];
       s := min !s !c;

@@ -72,7 +72,7 @@ module Exercise
   let ex2 (v: array int) : int
     requires{length v > 0}
     ensures {permut_all (old v) v}
-    ensures {forall i j:int. 0 <= i < j <= (length v) -> result <= (sum v i j)}
+    ensures {forall i j:int. 0 <= i < j <= (length v) -> result <= (sum v i j)}   
 
     ensures {exists i j:int. 0 <= i < j <= (length v) /\ result = (sum v i j)}
    =
