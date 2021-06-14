@@ -10,8 +10,6 @@ Require Import Extraction.
    - https://stackoverflow.com/questions/46410116/coq-how-to-prove-max-a-b-ab
 *)
 
-Search ( _ = _ ).
-
 Lemma euclides :
  forall (a b: nat), (b > 0) ->
     {par: (nat * nat) | (a = ((fst par) * b) + (snd par))
@@ -34,7 +32,7 @@ induction a.
  - destruct IHa as [x p].
    destruct x as [q r]. (* Separar par x *)
    destruct p as [p1 p2]. (* Separar condições de p *)
-   case (Compare_dec.le_lt_dec b (S r)). (* Analisar os casos de b >= r+1*)
+   case (Compare_dec.le_lt_dec b (S r)).   (* Analisar os casos de b >= r+1*)
 
    (* b <= S r *)
    (* q' = S q /\ r' = 0 *)
@@ -58,7 +56,7 @@ induction a.
      exact H.
      apply Nat.le_antisymm.
      exact Hle.
-     trivial.
+     assumption.
 
    (* b > S r *)
    (* q' = q /\ r' = S r *)
