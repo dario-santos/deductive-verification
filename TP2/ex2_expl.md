@@ -1,19 +1,18 @@
 ## dois_div
 
 ```
- n + (m/2) = (n + n + m) / 2
+Caso base:
+  0 + (m/2) = (0 + 0 + m) / 2
+  m/2 = m/2
 
-base:
- 0 + (m/2) = (0 + 0 + m) / 2
- m/2 = m/2
-
-indutivo:
-  Hip.: k + (m/2) = (k + k + m) / 2
+Caso indutivo:
+ 1. Hipótese: k + (m/2) = (k + k + m) / 2
   
-  Ind.: 
+ 2. Indução: 
     (k+1) + (m/2) = ((k+1) + (k+1) + m) / 2
      = (2 + k + k + m) / 2
      = 1 + (k + k + m) / 2
+     = 1 + k + (m/2)
      = (k+1) + (m/2)
 ```
 
@@ -25,20 +24,20 @@ indutivo:
 n + (somat n) = (n + n + n + (n*n)) / 2
 
 
-base: 
+Caso base: 
   0 + (somat 0) = (0 + 0 + 0 + (0*0))/2
   0 = 0 (reflexivity)
 
-indutivo:
- Hip.: k + (somat k) = (k + k + k + (k*k)) / 2
+Casp indutivo:
+ 1. Hipótese: k + (somat k) = (k + k + k + (k*k)) / 2
 
- Ind.: 
+ 2. Indução: 
    (k+1) + (somat (k+1))  = ((k+1) + (k+1) + (k+1) + ((k+1)*(k+1))) / 2   
 (binonimo)                = (4 + k + k + k + (k*k) + 2k)) / 2
 (substituir por Hipótese) = 2 + 2k + (somat k)
 (desdobrar multiplicação) = 2(k+1) + (somat k)
 (função somat)            = (k+1) + (k+1) + (somat k)
-(reflexivity)       (k+1) + (somat (k+1)) = (k+1) + (somat (k+1))
+(reflexivity)             = (k+1) + (somat (k+1))
 
 
 
@@ -58,29 +57,17 @@ Ind v2:
 somat n = (n * (n + 1)) / 2
 
 
-base:
+Caso base:
   somat 0 = (0 * (0 + 1)) / 2
-  (reflexivity) 0 = 0
+  0 = 0 (reflexivity)
 
-indutivo:
-  Hip.:
-    somat k = (k * (k + 1)) / 2
+Caso indutivo:
+  Hipótese: somat k = (k * (k + 1)) / 2
 
-  Ind.: 
+  Indução: 
     somat (k+1) = ((k+1) * ((k+1) + 1)) / 2
-           <=> somat (k+1) = ((k+1) * (k+2)) / 2
-           <=> 1 + k + (somat k) = ((k+1) * (k+2)) / 2
-(soma_aux) <=> 1 + ((k + k + k + (k * k)) / 2) = ((k+1) * (k+2)) / 2
-           <=> 1 + ((k + k + k + (k * k)) / 2) = ((k+1) * (k+2)) / 2
-
-
-
-
-
-
-(dois_div) <=> ((2 + k + k + k + (k * k)) / 2) = ((k+1) * (k+2)) / 2
-(dois_div) <=> 1 + ((k + 2k + (k * k)) / 2) = ((k+1) * (k+2)) / 2
-           <=> 1 + ((k + k*(k + 2)) / 2) = ((k+1) * (k+2)) / 2
-           <=> 1 + ((k + 2k + (k * k)) / 2) = ((k+1) * (k+2)) / 2
-
+              <=> somat (k+1) = ((k+1) * (k+2)) / 2
+              <=> 1 + k + (somat k) = (k*k + 2k + k + 2) / 2
+(soma_aux)    <=> 1 + ((k + k + k + (k*k)) / 2) = 1 + ((3k + (k*k)) / 2)
+(reflexivity) <=> 1 + ((3k + (k*k)) / 2) = 1 + ((3k + (k*k)) / 2)
 ```
