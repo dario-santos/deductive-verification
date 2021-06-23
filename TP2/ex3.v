@@ -32,7 +32,7 @@ induction a.
  - destruct IHa as [x p].
    destruct x as [q r]. (* Separar par x *)
    destruct p as [p1 p2]. (* Separar condições de p *)
-   case (Compare_dec.le_lt_dec b (S r)).   (* Analisar os casos de b >= r+1*)
+   case (le_lt_dec b (S r)).   (* Analisar os casos de b >= r+1*)
 
    (* b <= S r *)
    (* q' = S q /\ r' = 0 *)
@@ -73,5 +73,20 @@ induction a.
      exact Hgt.
 Qed.
 
+
 (* Extrair código para "euclides.ml" *)
+Set Extraction Optimize.
+Unset Extraction KeepSingleton.
+Set Extraction AutoInline.
+
+Require Import ExtrOcamlNatInt.
+
+
+Extract Inductive sumbool => "bool" [ "true" "false" ].
+Extract Inductive prod => "(*)"  [ "(,)" ].
+Extract Inductive nat => int  [ "0" "succ" ].
+
+Extract Inlined Constant le_lt_dec => "(<)".
+
 Extraction "euclides.ml" euclides.
+
