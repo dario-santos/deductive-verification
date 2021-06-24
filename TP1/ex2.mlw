@@ -12,21 +12,6 @@
 *)
 
 (*
-  Pseudo Código:
-
-  k := 1;
-  s := b[0];
-  c := b[0];
-  
-  do k <> n 
-    c:= min (c+b[k]) b[k];
-    s:= min c s;
-    
-    k:= k+l
-  od
-*)
-
-(*
   Module: PaperExample
   Date: 12/06/2021
   Description: Implementação do exemplo do artigo [1]
@@ -55,7 +40,7 @@ end
 
 (*
   Module: Exercise
-  Date: 12/06/2021
+  Date: 25/06/2021
   Description: Implementação do algoritmo soma da secção minima de um vetor do artigo [1]
 *)
 module Exercise
@@ -67,28 +52,48 @@ module Exercise
   use array.ArraySum
   use array.ArrayPermut
   use array.ArrayEq
+
+lemma intervals_in_array:
+   forall v: array int. length v > 0 ->( 
+    (forall i j: int. 0 <= i <= j <= (length v) ->
+      (exists r s: int. 0 <= r <= s <= (length v) /\ r = i /\ s = j /\ (sum v i j) = (sum v r s))))
   
-  let ex2 (v: array int) : int
+  let ex2 (v: array int) : (int, int, int)
     requires{length v > 0}
     ensures {permut_all (old v) v}
-    ensures {forall i j:int. 0 <= i < j <= (length v) -> result <= (sum v i j)}   
-
-    ensures {exists i j:int. 0 <= i < j <= (length v) /\ result = (sum v i j)}
+    ensures {let r, _, _ = result in 
+      forall i j:int. 0 <= i < j <= (length v) -> r <= (sum v i j)}
+    ensures {let _, i_r, f_r = result in 
+      exists i j:int. 0 <= i <= j <= (length v) /\ i = i_r /\ j = f_r /\ (sum v i (j+1)) = (sum v i_r (f_r+1))}
    =
     let n = length v in
     let s = ref v[0] in
     let c = ref v[0] in
-       
+
+    let i_c, f_c = ref 0, ref 0 in
+    let i_s, f_s = ref 0, ref 0 in
+    
     for k=1 to n-1 do
       invariant {0 <= k <= n}
       invariant {permut_all (old v) v}
+
       invariant {forall i j:int. 0 <= i < j <= k -> !s <= (sum v i j)}
       invariant {forall i:int. 0 <= i < k -> !c <= (sum v i k)}
-      invariant {exists i j:int. 0 <= i < j <= k /\ (!c + v[k]) = (sum v i j) -> !s = (sum v i j)}
 
+      invariant {exists i j:int. 0 <= i <= j <= k /\ i = !i_s /\ j = !f_s /\ (sum v i (j+1)) = (sum v !i_s (!f_s+1))}
+      invariant {exists i j:int. 0 <= i <= j <= k /\ i = !i_c /\ j = !f_c /\ (sum v i (j+1)) = (sum v !i_c (!f_c+1))}
+      
       c := min (!c + v[k]) v[k];
       s := min !s !c;
       
+      if v[k] < (!c + v[k]) then i_c := k;
+      f_c := k;
+      
+      if !s = !c then(
+        i_s := !i_c; 
+        f_s := !f_c;      
+      );
+
     done;
-    !s
+    !s, !i_s, !f_s
 end

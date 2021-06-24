@@ -103,64 +103,26 @@ end
   Referencias: http://toccata.lri.fr/gallery/isqrt.en.html
 *)
 module Primo_Sqrt
-
-  use int.Int
-
-  function sqr (x:int) : int = x * x
-  lemma sqr_non_neg: 
-    forall x:int. sqr x >= 0
-  lemma srq_sumcomm : 
-    forall x y:int. sqr (x+y) = sqr (y+x)
-  lemma sqr_succ : 
-    forall x : int. sqr (x+1) = sqr(x) + 2*x + 1
-  lemma sqr_sum :
-    forall x y : int. sqr(x+y) = sqr x + 2*x*y + sqr y
-  lemma sqr_incr0 : 
-    forall x:int. sqr(x) = sqr(x+0)   
-  lemma sqr_incr1 : 
-    forall x:int. x >= 0 -> sqr x < sqr (x+1)
-  lemma sqr_incr2 : 
-    forall x y:int. x >= 0 /\ y >= 0 -> sqr (x) <= sqr(x+y)
-  lemma sqr_increasing:
-    forall x y:int. 0 <= x <= y -> sqr x <= sqr y
   
-  predicate isqrt_spec (x res:int) =
-    res >= 0 /\ sqr res <= x < sqr (res + 1)
+  (* Utilização do ficheiro local *)
+  use isqrt.Gallery_Isqrt
   
   use int.Int
   use int.EuclideanDivision
   use ref.Ref
-  use number.Prime
   use number.Divisibility
-  
-
-  let function isqrt (x:int) : int
-      requires { x >= 0 }
-      ensures  { isqrt_spec x result }
-    = 
-      let count = ref 0 in
-      let sum = ref 1 in
-      while !sum <= x do
-        invariant { !count >= 0 }
-        invariant { x >= sqr !count }
-        invariant { !sum = sqr (!count+1) }
-        variant   { x - !count }
-        count := !count + 1;
-        sum := !sum + 2 * !count + 1
-      done;
-      !count
 
   let primo_sqrt (n:int) : bool
     requires{n > 1}
-    ensures {result <-> (forall j. 2 <= j < n -> not (divides n j))}
+    ensures {(not result) <-> (exists j. 2 <= j < n /\ (divides n j))}
   =
     let resultado = ref true in
     let n2 = (isqrt n) in
 
     for i=2 to n2 do
-      invariant{2 <= i /\ i <= n2+1 }
+      invariant{2 <= i /\ i <= n2+1}
       
-      invariant {(!resultado) <-> (forall j. 2 <= j < i -> not (divides n j))}
+      invariant {(not !resultado) <-> (exists j. 2 <= j < i /\ (divides n j))}
 
       if divides n i then resultado := false
 

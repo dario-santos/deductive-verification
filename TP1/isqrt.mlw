@@ -1,44 +1,38 @@
-
-module Isqrt
+module Gallery_Isqrt
 
   use int.Int
-  use int.EuclideanDivision
-  use ref.Ref
 
   function sqr (x:int) : int = x * x
-  lemma sqr_non_neg: 
-    forall x:int. sqr x >= 0
-  lemma srq_sumcomm : 
-    forall x y:int. sqr (x+y) = sqr (y+x)
-  lemma sqr_succ : 
-    forall x : int. sqr (x+1) = sqr(x) + 2*x + 1
-  lemma sqr_sum :
-    forall x y : int. sqr(x+y) = sqr x + 2*x*y + sqr y
-  lemma sqr_incr0 : 
-    forall x:int. sqr(x) = sqr(x+0)   
-  lemma sqr_incr1 : 
-    forall x:int. x >= 0 -> sqr x < sqr (x+1)
-  lemma sqr_incr2 : 
-    forall x y:int. x >= 0 /\ y >= 0 -> sqr (x) <= sqr(x+y)
+
+  lemma sqr_non_neg: forall x:int. sqr x >= 0
+
   lemma sqr_increasing:
     forall x y:int. 0 <= x <= y -> sqr x <= sqr y
-  
+
+  lemma sqr_sum :
+    forall x y : int. sqr(x+y) = sqr x + 2*x*y + sqr y
+
   predicate isqrt_spec (x res:int) =
     res >= 0 /\ sqr res <= x < sqr (res + 1)
 
-  let function isqrt (x:int) : int
-      requires { x >= 0 }
-      ensures  { isqrt_spec x result }
-    = 
-      let count = ref 0 in
-      let sum = ref 1 in
-      while !sum <= x do
-        invariant { !count >= 0 }
-        invariant { x >= sqr !count }
-        invariant { !sum = sqr (!count+1) }
-        variant   { x - !count }
-        count := !count + 1;
-        sum := !sum + 2 * !count + 1
-      done;
-      !count
+
+  use int.Int
+  use ref.Refint
+
+
+  let isqrt (x:int) : int
+    requires { x >= 0 }
+    ensures  { isqrt_spec x result }
+  = let ref count = 0 in
+    let ref sum = 1 in
+    while sum <= x do
+      invariant { count >= 0 }
+      invariant { x >= sqr count }
+      invariant { sum = sqr (count+1) }
+      variant   { x - count }
+      count += 1;
+      sum += 2 * count + 1
+    done;
+    count
+
 end
